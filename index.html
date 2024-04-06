@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car</title>
+
+<style>
+    body {
+        display: block;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        position: absolute;
+    }
+
+    
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+
+    #road {
+        height: 50px ;
+        width: 1082px ;
+        background-color: black;
+        position: absolute ;
+        left: 30px;
+        top: 225px;
+
+    }
+
+    #car {
+        width: 250px;
+        height: 100px;
+        position: absolute;
+        left: 30px;
+        top: 147px;
+        background-color: transparent;
+    }
+    .container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        position: absolute;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+    <div id="car" "><img src="car-removebg-preview.png" id="carImg" /></div>
+    <div id="road"></div>
+    <br /> <br /> <br /> <br /><br /> <br /> <br /> <br /><br /> <br /> <br /> <br /><br /> <br /> <br /> <br />
+    <div>    
+    <table >
+        <tr>
+            <td><div style="position: absolute ; top : 0;">
+                <button onclick="Move()" value="Move">Move</button>
+                <button onclick="Stop()" value="Stop">Stop</button>
+            </div></td>
+        </tr>
+        <tr>
+            <td>X - Axis</td>
+            <td><input type="text" id="X" disabled></td>
+        </tr>
+        <tr>
+            <td>Y - Axis</td>
+            <td><input type="text" id="Y" disabled></td>
+        </tr>
+    </table>
+    </div>
+</div>
+    <script>
+       var LVal = 30 ;
+       var DVal = 147 ;
+       var carObj = document.getElementById("car");
+       var XObj = document.getElementById("X");
+       var YObj = document.getElementById("Y");
+       queueArray = [];
+
+       function Move(){
+        var qNum = setInterval(MovingOnRoad, 100);
+        queueArray.push(qNum);
+       }
+
+       function Stop(){
+        for(var i = 0 ; i < queueArray.length; i++){
+            var queueToStop = queueArray[i];
+            clearInterval(queueToStop);
+        }
+    }
+
+    function MovingOnRoad(){
+        if(LVal > 1025){
+            var refToDiv = document.getElementById("car");
+            if(refToDiv != null){
+                if (DVal < 770 || LVal < 1250 ){
+                DVal = DVal + 5;
+                LVal = LVal + 5;
+                refToDiv.style.left = LVal + "px";
+                refToDiv.style.top = DVal + "px";
+                refToDiv.style.transform = "rotate(45deg)";
+                XObj.value = LVal;
+                YObj.value = DVal;
+                // debugger;
+                if(DVal == 772 || LVal == 1655){
+                    var imgcar = document.getElementById("carImg");
+                    imgcar.src = "fire-5518.gif";
+                    debugger;
+                }
+                
+            }
+            }     
+        }
+        else{
+            var refToDiv = document.getElementById("car");
+            if(refToDiv != null){
+                LVal = LVal + 5;
+                refToDiv.style.left = LVal + "px";
+                XObj.value = LVal;
+                YObj.value = DVal;
+            }
+        }
+
+    }
+    
+      
+    </script>
+</body>
+
+</html>
